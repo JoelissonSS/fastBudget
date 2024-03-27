@@ -14,8 +14,7 @@ import {
 import {
   format,
   addDays,
-  formatDistance,
-  FormatDistanceOptions,
+  formatDistance
 } from 'date-fns';
 import { ReactElement, useState } from 'react';
 
