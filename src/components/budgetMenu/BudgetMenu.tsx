@@ -22,8 +22,14 @@ export default function BudgetMenu() {
   const { register, handleSubmit } = useForm();
   let [budget, SetBudget] = useState<ReactElement>();
 
-  const handleCopyText = (e: any) => {
-    navigator.clipboard.writeText(e);
+  const handleCopyText = () => {
+    setTimeout(copy, 100);
+
+    function copy(){
+      
+      
+      navigator.clipboard.writeText(document.querySelector<HTMLElement>('#BudgetCopy')?.innerText)
+    }
   };
 
   function HandleBudGet(data: any) {
@@ -50,9 +56,8 @@ export default function BudgetMenu() {
       </div>
     );
     SetBudget(budget);
-    handleCopyText(
-      document.querySelector<HTMLElement>('#BudgetCopy')?.innerText,
-    );
+    
+    handleCopyText();
   }
 
   return (
