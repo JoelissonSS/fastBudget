@@ -44,7 +44,9 @@ export default function BudgetMenu() {
         *Incluso:* <br /> - Banheiro <br /> - Ar condicionado <br /> - Frigobar{' '}
         <br />- Ventilador <br />- TV <br /> - Sacada/Varanda <br /> - Chuveiro
         quente <br /> <br />
-        *Check-in a partir das 16h, check-out até às 14h*
+        *Check-in a partir das 16h, check-out até às 14h* <br />
+
+        *Para a confirmação da reserva é necessário 50% do valor do orçamento*
       </div>
     );
     SetBudget(budget);
