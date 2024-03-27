@@ -27,8 +27,8 @@ export default function BudgetMenu() {
 
     function copy(){
       
-      
-      navigator.clipboard.writeText(document.querySelector<HTMLElement>('#BudgetCopy')?.innerText)
+      const tagforcopy: any = document.querySelector<HTMLElement>('#BudgetCopy')?.innerText
+      navigator.clipboard.writeText(tagforcopy)
     }
   };
 
