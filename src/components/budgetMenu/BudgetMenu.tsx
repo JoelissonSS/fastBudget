@@ -85,7 +85,7 @@ export default function BudgetMenu() {
         *Orçamento para {entryDate} a {exitDate}* <br /> <br />
         Para {`${data.adults} Adultos `}
         {`${data.childs} Crianças`} <br />
-        {`${days} diária(s)`} {`na ${data.accommodation}`} <br />
+        {`${days} diária(s)`} {`na(o) ${data.accommodation}`} <br />
         {`No valor de R$ ${data.price},00`} <br /> <br />
         *Incluso:*
         {handleaccommodation(data.accommodation).map((itemInclude) => {
