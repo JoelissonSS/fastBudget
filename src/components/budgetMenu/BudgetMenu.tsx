@@ -11,24 +11,64 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '../ui/dialog';
-import {
-  format,
-  addDays,
-  formatDistance
-} from 'date-fns';
+import { format, addDays, formatDistance } from 'date-fns';
 import { ReactElement, useState } from 'react';
 
 export default function BudgetMenu() {
   const { register, handleSubmit } = useForm();
   let [budget, SetBudget] = useState<ReactElement>();
 
+  interface AccommodationTypes {
+    [key: string]: string[];
+  }
+  function handleaccommodation(accommodation: string): string[] {
+    const accommodationOpt: AccommodationTypes = {
+      'Suíte Master': [
+        'Frigo bar',
+        'Ar condicionado',
+        'Ventilador',
+        'Banheiro privado',
+        'Chuveiro quente',
+        'Roupa de cama e banho',
+        'Sacada/Varanda',
+        'Piscina',
+        'TV',
+      ],
+      'Suíte Inter': [
+        'Ar condicionado',
+        'Ventilador',
+        'Banheiro privado',
+        'Chuveiro quente',
+        'Roupa de cama e banho',
+        'Piscina',
+        'TV',
+      ],
+      'Suíte Simples': [
+        'Ventilador',
+        'Banheiro privado',
+        'Chuveiro quente',
+        'Roupa de cama e banho',
+        'Piscina',
+        'TV',
+      ],
+      'Quarto Simples': [
+        'Ventilador',
+        'Banheiro Compartilhado',
+        'Roupa de cama e banho',
+        'Piscina',
+      ],
+    };
+
+    return accommodationOpt[accommodation];
+  }
+
   const handleCopyText = () => {
     setTimeout(copy, 100);
 
-    function copy(){
-      
-      const tagforcopy: any = document.querySelector<HTMLElement>('#BudgetCopy')?.innerText
-      navigator.clipboard.writeText(tagforcopy)
+    function copy() {
+      const tagforcopy: any =
+        document.querySelector<HTMLElement>('#BudgetCopy')?.innerText;
+      navigator.clipboard.writeText(tagforcopy);
     }
   };
 
@@ -42,21 +82,25 @@ export default function BudgetMenu() {
     const budget = (
       <div>
         <h2>*Pousada e Camping Ilha do Mel*</h2> <br />
-        *Orçamento para {entryDate} a {exitDate}* <br />
+        *Orçamento para {entryDate} a {exitDate}* <br /> <br />
         Para {`${data.adults} Adultos `}
         {`${data.childs} Crianças`} <br />
         {`${days} diária(s)`} {`na ${data.accommodation}`} <br />
         {`No valor de R$ ${data.price},00`} <br /> <br />
-        *Incluso:* <br /> - Banheiro <br /> - Ar condicionado <br /> - Frigobar{' '}
-        <br />- Ventilador <br />- TV <br /> - Sacada/Varanda <br /> - Chuveiro
-        quente <br /> <br />
-        *Check-in a partir das 16h, check-out até às 14h* <br />
-
+        *Incluso:*
+        {handleaccommodation(data.accommodation).map((itemInclude) => {
+          return (
+            <ul>
+              <li>ㅤㅤ{itemInclude}</li>
+            </ul>
+          );
+        })}{' '}
+        <br />
+        *Check-in a partir das 16h, check-out até às 14h* <br /> <br />
         *Para a confirmação da reserva é necessário 50% do valor do orçamento*
       </div>
     );
     SetBudget(budget);
-    
     handleCopyText();
   }
 
@@ -106,7 +150,7 @@ export default function BudgetMenu() {
           </option>
           <option value="Suíte Inter">Suíte Inter</option>
           <option value="Suíte Simples">Suíte Simples</option>
-          <option value="Quarto simples">Quarto simples</option>
+          <option value="Quarto Simples">Quarto simples</option>
         </select>
 
         <Input required type="number" {...register('price')} />
