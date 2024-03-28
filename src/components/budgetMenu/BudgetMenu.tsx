@@ -84,7 +84,7 @@ export default function BudgetMenu() {
         <h2>*Pousada e Camping Ilha do Mel*</h2> <br />
         *Orçamento para {entryDate} a {exitDate}* <br /> <br />
         Para {`${data.adults} Adultos `}
-        {`${data.childs} Crianças`} <br />
+        {data.childs>0?`${data.childs} Crianças`: false} <br />
         {`${days} diária(s)`} {`na(o) ${data.accommodation}`} <br />
         {`No valor de R$ ${data.price},00`} <br /> <br />
         *Incluso:*
