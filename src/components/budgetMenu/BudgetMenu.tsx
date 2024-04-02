@@ -31,7 +31,6 @@ export default function BudgetMenu() {
         'Chuveiro quente',
         'Roupa de cama e banho',
         'Sacada/Varanda',
-        'Piscina',
         'TV',
       ],
       'Suíte Inter': [
@@ -40,7 +39,6 @@ export default function BudgetMenu() {
         'Banheiro privado',
         'Chuveiro quente',
         'Roupa de cama e banho',
-        'Piscina',
         'TV',
       ],
       'Suíte Simples': [
@@ -48,14 +46,12 @@ export default function BudgetMenu() {
         'Banheiro privado',
         'Chuveiro quente',
         'Roupa de cama e banho',
-        'Piscina',
         'TV',
       ],
       'Quarto Simples': [
         'Ventilador',
         'Banheiro Compartilhado',
         'Roupa de cama e banho',
-        'Piscina',
       ],
     };
 
@@ -96,6 +92,12 @@ export default function BudgetMenu() {
           );
         })}{' '}
         <br />
+        Com acesso à: 
+        ㅤㅤPicina
+        ㅤㅤChurrasqueira
+        ㅤㅤPlayground
+        ㅤㅤCozinha comunitária
+        ㅤㅤEstacionamento
         *Check-in a partir das 16h, check-out até às 14h* <br /> <br />
         *Para a confirmação da reserva é necessário 50% do valor do orçamento*
       </div>
