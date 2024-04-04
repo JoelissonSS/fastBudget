@@ -97,7 +97,10 @@ export default function BudgetMenu() {
         ㅤㅤChurrasqueira <br />
         ㅤㅤPlayground <br />
         ㅤㅤCozinha comunitária <br />
-        ㅤㅤEstacionamento <br /> <br />
+        ㅤㅤEstacionamento <br /> 
+        ㅤㅤWi-fi <br /> <br />
+
+        *Aceitamos pets de pequeno porte*
         *Check-in a partir das 16h, check-out até às 14h* <br /> <br />
         *Para a confirmação da reserva é necessário 50% do valor do orçamento*
       </div>
