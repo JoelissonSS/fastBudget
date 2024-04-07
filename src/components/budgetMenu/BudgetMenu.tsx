@@ -90,18 +90,18 @@ export default function BudgetMenu() {
               <li>ㅤㅤ{itemInclude}</li>
             </ul>
           );
-        })}{' '}
+        })}
         
         *Com acesso à:* <br />
-        ㅤㅤPicina <br />
+        ㅤㅤPiscina <br />
         ㅤㅤChurrasqueira <br />
         ㅤㅤPlayground <br />
         ㅤㅤCozinha comunitária <br />
         ㅤㅤEstacionamento <br /> 
         ㅤㅤWi-fi <br /> <br />
 
-        *Aceitamos pets de pequeno porte*
-        *Check-in a partir das 16h, check-out até às 14h* <br /> <br />
+        *Aceitamos pets de pequeno porte* <br />
+        *Check-in a partir das 16h, check-out até às 14h* <br />
         *Para a confirmação da reserva é necessário 50% do valor do orçamento*
       </div>
     );
