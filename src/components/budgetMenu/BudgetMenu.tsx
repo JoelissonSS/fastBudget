@@ -1,70 +1,23 @@
 import { Label } from '@radix-ui/react-label';
 import { Input } from '../ui/input';
 import { useForm } from 'react-hook-form';
-import { Button } from '../ui/button';
-import {
-  Dialog,
-  DialogClose,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from '../ui/dialog';
+import Dialog from '@/components/budgetDialog/BudgetDialog'
+
 import { format, addDays, formatDistance } from 'date-fns';
-import { ReactElement, useState } from 'react';
+import { ReactElement, useRef, useState } from 'react';
+import handleaccommodation from './budgetopt';
+import { BudgetContext } from './BudgetContext';
 
 export default function BudgetMenu() {
   const { register, handleSubmit } = useForm();
-  let [budget, SetBudget] = useState<ReactElement>();
-
-  interface AccommodationTypes {
-    [key: string]: string[];
-  }
-  function handleaccommodation(accommodation: string): string[] {
-    const accommodationOpt: AccommodationTypes = {
-      'Suíte Master': [
-        'Frigo bar',
-        'Ar condicionado',
-        'Ventilador',
-        'Banheiro privado',
-        'Chuveiro quente',
-        'Roupa de cama e banho',
-        'Sacada/Varanda',
-        'TV',
-      ],
-      'Suíte Inter': [
-        'Ar condicionado',
-        'Ventilador',
-        'Banheiro privado',
-        'Chuveiro quente',
-        'Roupa de cama e banho',
-        'TV',
-      ],
-      'Suíte Simples': [
-        'Ventilador',
-        'Banheiro privado',
-        'Chuveiro quente',
-        'Roupa de cama e banho',
-        'TV',
-      ],
-      'Quarto Simples': [
-        'Ventilador',
-        'Banheiro Compartilhado',
-        'Roupa de cama e banho',
-      ],
-    };
-
-    return accommodationOpt[accommodation];
-  }
-
+  let [budget, SetBudget] = useState<JSX.Element>();
+  const budgetDialogSec = useRef<HTMLParagraphElement>(null);
   const handleCopyText = () => {
     setTimeout(copy, 100);
-
     function copy() {
-      const tagforcopy: any =
-        document.querySelector<HTMLElement>('#BudgetCopy')?.innerText;
-      navigator.clipboard.writeText(tagforcopy);
+      budgetDialogSec.current?.innerText
+        ? navigator.clipboard.writeText(budgetDialogSec.current.innerText)
+        : null;
     }
   };
 
@@ -80,7 +33,7 @@ export default function BudgetMenu() {
         <h2>*Pousada e Camping Ilha do Mel*</h2> <br />
         *Orçamento para {entryDate} a {exitDate}* <br /> <br />
         Para {`${data.adults} Adultos `}
-        {data.childs>0?`${data.childs} Crianças`: false} <br />
+        {data.childs > 0 ? `${data.childs} Crianças` : false} <br />
         {`${days} diária(s)`} {`na(o) ${data.accommodation}`} <br />
         {`No valor de R$ ${data.price},00`} <br /> <br />
         *Incluso:*
@@ -91,15 +44,13 @@ export default function BudgetMenu() {
             </ul>
           );
         })}
-        
         *Com acesso à:* <br />
         ㅤㅤPiscina <br />
         ㅤㅤChurrasqueira <br />
         ㅤㅤPlayground <br />
         ㅤㅤCozinha comunitária <br />
-        ㅤㅤEstacionamento <br /> 
+        ㅤㅤEstacionamento <br />
         ㅤㅤWi-fi <br /> <br />
-
         *Aceitamos pets de pequeno porte* <br />
         *Check-in a partir das 16h, check-out até às 14h* <br />
         *Para a confirmação da reserva é necessário 50% do valor do orçamento*
@@ -110,6 +61,7 @@ export default function BudgetMenu() {
   }
 
   return (
+    <BudgetContext.Provider value={{budget}}>
     <div>
       <form onSubmit={handleSubmit(HandleBudGet)} className="w-72 mx-auto ">
         <div>
@@ -160,19 +112,9 @@ export default function BudgetMenu() {
 
         <Input required type="number" {...register('price')} />
 
-        <Dialog>
-          <DialogTrigger>
-            <Button>Confirmar</Button>
-          </DialogTrigger>
-          <DialogContent>
-            <DialogHeader>
-              <DialogTitle>Orçamento Rápido</DialogTitle>
-              <DialogDescription id="BudgetCopy">{budget}</DialogDescription>
-              <DialogClose> Sair </DialogClose>
-            </DialogHeader>
-          </DialogContent>
-        </Dialog>
+        <Dialog />
       </form>
     </div>
+    </BudgetContext.Provider>
   );
 }
