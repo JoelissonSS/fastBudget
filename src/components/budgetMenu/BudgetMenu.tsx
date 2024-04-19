@@ -1,25 +1,17 @@
 import { Label } from '@radix-ui/react-label';
 import { Input } from '../ui/input';
 import { useForm } from 'react-hook-form';
-import Dialog from '@/components/budgetDialog/BudgetDialog'
+import Dialog from '@/components/budgetDialog/BudgetDialog';
 
 import { format, addDays, formatDistance } from 'date-fns';
-import { ReactElement, useRef, useState } from 'react';
+import { useState } from 'react';
 import handleaccommodation from './budgetopt';
 import { BudgetContext } from './BudgetContext';
 
 export default function BudgetMenu() {
   const { register, handleSubmit } = useForm();
   let [budget, SetBudget] = useState<JSX.Element>();
-  const budgetDialogSec = useRef<HTMLParagraphElement>(null);
-  const handleCopyText = () => {
-    setTimeout(copy, 100);
-    function copy() {
-      budgetDialogSec.current?.innerText
-        ? navigator.clipboard.writeText(budgetDialogSec.current.innerText)
-        : null;
-    }
-  };
+  
 
   function HandleBudGet(data: any) {
     const entryDate = format(addDays(data.entryDate, 1), 'dd/MM/yyyy');
@@ -57,64 +49,63 @@ export default function BudgetMenu() {
       </div>
     );
     SetBudget(budget);
-    handleCopyText();
   }
 
   return (
-    <BudgetContext.Provider value={{budget}}>
-    <div>
-      <form onSubmit={handleSubmit(HandleBudGet)} className="w-72 mx-auto ">
-        <div>
-          <Label>
-            Data de entrada
-            <Input
-              className="inline-block"
-              type="date"
-              {...register('entryDate')}
-            />
-          </Label>
-          <Label>
-            Data de saída
-            <Input
-              className="inline-block"
-              type="date"
-              {...register('exitDate')}
-            />
-          </Label>
-        </div>
-        <select {...register('adults')}>
-          <option value="1">1 Adultos</option>
-          <option value="2" selected>
-            2 Adultos
-          </option>
-          <option value="3">3 Adultos</option>
-          <option value="4">4 Adultos</option>
-          <option value="5">5 Adultos</option>
-        </select>
-        <select {...register('childs')}>
-          <option value="0" selected>
-            0 Crianças
-          </option>
-          <option value="1">1 Crianças</option>
-          <option value="2">2 Crianças</option>
-          <option value="3">3 Crianças</option>
-          <option value="4">4 Crianças</option>
-          <option value="5">5 Crianças</option>
-        </select>
-        <select {...register('accommodation')}>
-          <option value="Suíte Master" selected>
-            Suíte Master
-          </option>
-          <option value="Suíte Inter">Suíte Inter</option>
-          <option value="Suíte Simples">Suíte Simples</option>
-          <option value="Quarto Simples">Quarto simples</option>
-        </select>
+    <BudgetContext.Provider value={{ budget }}>
+      <div>
+        <form onSubmit={handleSubmit(HandleBudGet)} className="w-72 mx-auto ">
+          <div>
+            <Label>
+              Data de entrada
+              <Input
+                className="inline-block"
+                type="date"
+                {...register('entryDate')}
+              />
+            </Label>
+            <Label>
+              Data de saída
+              <Input
+                className="inline-block"
+                type="date"
+                {...register('exitDate')}
+              />
+            </Label>
+          </div>
+          <select {...register('adults')}>
+            <option value="1">1 Adultos</option>
+            <option value="2" selected>
+              2 Adultos
+            </option>
+            <option value="3">3 Adultos</option>
+            <option value="4">4 Adultos</option>
+            <option value="5">5 Adultos</option>
+          </select>
+          <select {...register('childs')}>
+            <option value="0" selected>
+              0 Crianças
+            </option>
+            <option value="1">1 Crianças</option>
+            <option value="2">2 Crianças</option>
+            <option value="3">3 Crianças</option>
+            <option value="4">4 Crianças</option>
+            <option value="5">5 Crianças</option>
+          </select>
+          <select {...register('accommodation')}>
+            <option value="Suíte Master" selected>
+              Suíte Master
+            </option>
+            <option value="Suíte Inter">Suíte Inter</option>
+            <option value="Suíte Simples">Suíte Simples</option>
+            <option value="Quarto Simples">Quarto simples</option>
+          </select>
 
-        <Input required type="number" {...register('price')} />
+          <Input required type="number" {...register('price')} />
 
-        <Dialog />
-      </form>
-    </div>
+          <Dialog/>
+        </form>
+      </div>
     </BudgetContext.Provider>
   );
 }
