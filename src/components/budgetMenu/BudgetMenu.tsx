@@ -11,7 +11,6 @@ import { BudgetContext } from './BudgetContext';
 export default function BudgetMenu() {
   const { register, handleSubmit } = useForm();
   let [budget, SetBudget] = useState<JSX.Element>();
-  
 
   function HandleBudGet(data: any) {
     const entryDate = format(addDays(data.entryDate, 1), 'dd/MM/yyyy');
@@ -20,7 +19,7 @@ export default function BudgetMenu() {
       addDays(data.entryDate, 1),
       addDays(data.exitDate, 1),
     ).substring(1, 0);
-    const budget = (
+    SetBudget(
       <div>
         <h2>*Pousada e Camping Ilha do Mel*</h2> <br />
         *Orçamento para {entryDate} a {exitDate}* <br /> <br />
@@ -46,9 +45,8 @@ export default function BudgetMenu() {
         *Aceitamos pets de pequeno porte* <br />
         *Check-in a partir das 16h, check-out até às 14h* <br />
         *Para a confirmação da reserva é necessário 50% do valor do orçamento*
-      </div>
+      </div>,
     );
-    SetBudget(budget);
   }
 
   return (
@@ -103,7 +101,7 @@ export default function BudgetMenu() {
 
           <Input required type="number" {...register('price')} />
 
-          <Dialog/>
+          <Dialog />
         </form>
       </div>
     </BudgetContext.Provider>
