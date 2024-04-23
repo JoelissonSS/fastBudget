@@ -51,7 +51,7 @@ export default function BudgetMenu() {
 
   return (
     <BudgetContext.Provider value={{ budget }}>
-      <div>
+      <div className='h-screen flex place-items-center '>
         <form onSubmit={handleSubmit(HandleBudGet)} className="w-72 mx-auto ">
           <div>
             <Label>
