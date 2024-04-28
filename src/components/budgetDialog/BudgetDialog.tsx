@@ -15,9 +15,9 @@ import handleCopyText from './copy';
 const BudgetDialog = () => {
   const budgetsection = React.useRef<HTMLParagraphElement>(null);
   const { budget } = useGlobalContext();
-   React.useEffect(() => {
-        budget? handleCopyText(budgetsection.current?.innerText): null
-      }, [budget])
+  React.useEffect(() => {
+    budget ? handleCopyText(budgetsection.current?.innerText) : null;
+  }, [budget]);
   return (
     <Dialog>
       <DialogTrigger>
