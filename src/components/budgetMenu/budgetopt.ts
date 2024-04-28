@@ -11,7 +11,6 @@ export default function handleaccommodation(accommodation: string): string[] {
       'Chuveiro quente',
       'Roupa de cama e banho',
       'Sacada/Varanda',
-      'Piscina',
       'TV',
     ],
     'Suíte Inter': [
@@ -20,7 +19,6 @@ export default function handleaccommodation(accommodation: string): string[] {
       'Banheiro privado',
       'Chuveiro quente',
       'Roupa de cama e banho',
-      'Piscina',
       'TV',
     ],
     'Suíte Simples': [
@@ -28,14 +26,12 @@ export default function handleaccommodation(accommodation: string): string[] {
       'Banheiro privado',
       'Chuveiro quente',
       'Roupa de cama e banho',
-      'Piscina',
       'TV',
     ],
     'Quarto Simples': [
       'Ventilador',
       'Banheiro Compartilhado',
       'Roupa de cama e banho',
-      'Piscina',
     ],
   };
 
