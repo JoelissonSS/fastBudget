@@ -122,7 +122,7 @@ export default function BudgetMenu() {
             <option value="Quarto Simples">Quarto simples</option>
           </select>
 
-          <Input required type="number" {...register('price')} />
+          <Input className='mb-2' required type="number" {...register('price')} />
 
           <Dialog />
         </form>
