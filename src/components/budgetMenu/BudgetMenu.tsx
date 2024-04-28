@@ -2,17 +2,32 @@ import { Label } from '@radix-ui/react-label';
 import { Input } from '../ui/input';
 import { useForm } from 'react-hook-form';
 import Dialog from '@/components/budgetDialog/BudgetDialog';
+import { useLocalStorage } from 'usehooks-ts';
 
 import { format, addDays, formatDistance } from 'date-fns';
-import { useState } from 'react';
+import {  useState } from 'react';
 import handleaccommodation from './budgetopt';
 import { BudgetContext } from './BudgetContext';
+import React from 'react';
 
 export default function BudgetMenu() {
   const { register, handleSubmit } = useForm();
   let [budget, SetBudget] = useState<JSX.Element>();
-
-  function HandleBudGet(data: any) {
+  const nameRef = React.useRef<HTMLInputElement>(null);
+  const [name, setName] = useLocalStorage<string | undefined>('name', '');
+  React.useEffect(() => {
+    if (name) {
+      nameRef.current?.innerText
+    }
+    setName(name)
+    
+  }
+,[name])
+  function handleName(){
+    setName(nameRef.current?.value)
+    
+  }
+  function handleBudGet(data: any) {
     const entryDate = format(addDays(data.entryDate, 1), 'dd/MM/yyyy');
     const exitDate = format(addDays(data.exitDate, 1), 'dd/MM/yyyy');
     const days = formatDistance(
@@ -21,10 +36,10 @@ export default function BudgetMenu() {
     ).substring(1, 0);
     SetBudget(
       <div>
-        <h2>*Pousada e Camping Ilha do Mel*</h2> <br />
+        <h2>*{name}*</h2> <br />
         *Orçamento para {entryDate} a {exitDate}* <br /> <br />
         Para {`${data.adults} Adultos `}
-        {data.childs > 0 ? `${data.childs} Crianças` : false} <br />
+        {data.childs > 0 ? `${data.childs} Crianças` : null} <br />
         {`${days} diária(s)`} {`na(o) ${data.accommodation}`} <br />
         {`No valor de R$ ${data.price},00`} <br /> <br />
         *Incluso:*
@@ -52,7 +67,11 @@ export default function BudgetMenu() {
   return (
     <BudgetContext.Provider value={{ budget }}>
       <div className="h-screen flex place-items-center ">
-        <form onSubmit={handleSubmit(HandleBudGet)} className="w-72 mx-auto ">
+        <form onSubmit={handleSubmit(handleBudGet)} className="w-72 mx-auto ">
+          <Label>
+            Insira o nome da pousada/hotel
+            <Input type="text" placeholder={name} onBlur={handleName} ref={nameRef} />
+          </Label>
           <div>
             <Label>
               Data de entrada
