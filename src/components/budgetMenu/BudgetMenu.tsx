@@ -5,29 +5,28 @@ import Dialog from '@/components/budgetDialog/BudgetDialog';
 import { useLocalStorage } from 'usehooks-ts';
 
 import { format, addDays, formatDistance } from 'date-fns';
-import {  useState } from 'react';
+import { useState } from 'react';
 import handleaccommodation from './budgetopt';
 import { BudgetContext } from './BudgetContext';
 import React from 'react';
-
+type budgetProps = {
+  accommodation: string;
+  adults: number;
+  childs: number;
+  entryDate: string;
+  exitDate: string;
+  price: number;
+};
 export default function BudgetMenu() {
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit } = useForm<budgetProps>();
   let [budget, SetBudget] = useState<JSX.Element>();
   const nameRef = React.useRef<HTMLInputElement>(null);
   const [name, setName] = useLocalStorage<string | undefined>('name', '');
-  React.useEffect(() => {
-    if (name) {
-      nameRef.current?.innerText
-    }
-    setName(name)
-    
+  function handleName() {
+    setName(nameRef.current?.value);
   }
-,[name])
-  function handleName(){
-    setName(nameRef.current?.value)
-    
-  }
-  function handleBudGet(data: any) {
+
+  function handleBudGet(data: budgetProps) {
     const entryDate = format(addDays(data.entryDate, 1), 'dd/MM/yyyy');
     const exitDate = format(addDays(data.exitDate, 1), 'dd/MM/yyyy');
     const days = formatDistance(
@@ -70,7 +69,12 @@ export default function BudgetMenu() {
         <form onSubmit={handleSubmit(handleBudGet)} className="w-72 mx-auto ">
           <Label>
             Insira o nome da pousada/hotel
-            <Input type="text" placeholder={name} onBlur={handleName} ref={nameRef} />
+            <Input
+              type="text"
+              placeholder={name}
+              onBlur={handleName}
+              ref={nameRef}
+            />
           </Label>
           <div>
             <Label>
