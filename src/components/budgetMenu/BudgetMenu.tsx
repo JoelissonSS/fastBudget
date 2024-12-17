@@ -51,7 +51,6 @@ export default function BudgetMenu() {
         })}
         *Com acesso à:* <br />
         ㅤㅤPiscina <br />
-        ㅤㅤChurrasqueira <br />
         ㅤㅤPlayground <br />
         ㅤㅤCozinha comunitária <br />
         ㅤㅤEstacionamento <br />
